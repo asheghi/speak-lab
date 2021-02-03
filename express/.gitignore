@@ -1,0 +1,6 @@
+# Created by .ignore support plugin (hsz.mobi)
+/FILE_STORAGE/
+/dist/
+node_modules
+/.env
+/yarn-error.log

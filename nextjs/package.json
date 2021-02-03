@@ -1,0 +1,30 @@
+{
+  "name": "next-js",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_ENV=development next dev -p 3001",
+    "build": "next build",
+    "start": "next start",
+    "prod": "npm run build ; npm run start"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.3.6",
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-sass": "^1.0.1",
+    "axios": "^0.21.0",
+    "fetch": "^1.1.0",
+    "graphql": "^15.4.0",
+    "highlightable": "^1.0.7",
+    "mousetrap": "^1.6.5",
+    "next": "9.5.3",
+    "node-fetch": "^2.6.1",
+    "node-sass": "^4.14.1",
+    "plyr": "^3.6.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-hotkeys": "^2.0.0",
+    "sass": "^1.26.10",
+    "subtitle": "^3.0.0"
+  }
+}

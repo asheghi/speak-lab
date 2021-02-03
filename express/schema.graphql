@@ -1,0 +1,2110 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+" A keystone list "
+type Artist {
+    """
+
+    This virtual field will be resolved in one of the following ways (in this order):
+    1. Execution of 'labelResolver' set on the Artist List config, or
+    2. As an alias to the field set on 'labelField' in the Artist List config, or
+    3. As an alias to a 'name' field on the Artist List (if one exists), or
+    4. As an alias to the 'id' field on the Artist List.
+    """
+    _label_: String
+    _lessonsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortLessonsBy!], where: LessonWhereInput): _QueryMeta
+    createdAt: DateTime
+    createdBy: User
+    id: ID!
+    lessons(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortLessonsBy!], where: LessonWhereInput): [Lesson!]!
+    name: String
+    updatedAt: DateTime
+    updatedBy: User
+}
+
+" A keystone list "
+type Category {
+    """
+
+    This virtual field will be resolved in one of the following ways (in this order):
+    1. Execution of 'labelResolver' set on the Category List config, or
+    2. As an alias to the field set on 'labelField' in the Category List config, or
+    3. As an alias to a 'name' field on the Category List (if one exists), or
+    4. As an alias to the 'id' field on the Category List.
+    """
+    _label_: String
+    _lessonsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortLessonsBy!], where: LessonWhereInput): _QueryMeta
+    createdAt: DateTime
+    createdBy: User
+    id: ID!
+    lessons(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortLessonsBy!], where: LessonWhereInput): [Lesson!]!
+    name: String
+    public: Boolean
+    updatedAt: DateTime
+    updatedBy: User
+}
+
+" A keystone list "
+type Definition {
+    """
+
+    This virtual field will be resolved in one of the following ways (in this order):
+    1. Execution of 'labelResolver' set on the Definition List config, or
+    2. As an alias to the field set on 'labelField' in the Definition List config, or
+    3. As an alias to a 'name' field on the Definition List (if one exists), or
+    4. As an alias to the 'id' field on the Definition List.
+    """
+    _label_: String
+    _synonymsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortSynonymsBy!], where: SynonymWhereInput): _QueryMeta
+    definition: String
+    example: String
+    id: ID!
+    meaning: Meaning
+    synonyms(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortSynonymsBy!], where: SynonymWhereInput): [Synonym!]!
+}
+
+type File {
+    encoding: String
+    filename: String
+    id: ID
+    mimetype: String
+    originalFilename: String
+    path: String
+    publicUrl: String
+}
+
+type GetDefinitionResponse {
+    error: String
+    result: String
+}
+
+" A keystone list "
+type Image {
+    """
+
+    This virtual field will be resolved in one of the following ways (in this order):
+    1. Execution of 'labelResolver' set on the Image List config, or
+    2. As an alias to the field set on 'labelField' in the Image List config, or
+    3. As an alias to a 'name' field on the Image List (if one exists), or
+    4. As an alias to the 'id' field on the Image List.
+    """
+    _label_: String
+    createdAt: DateTime
+    createdBy: User
+    encoding: String
+    file: File
+    filePath: String
+    id: ID!
+    mimetype: String
+    name: String
+    size: String
+    updatedAt: DateTime
+    updatedBy: User
+    url: String
+}
+
+" A keystone list "
+type Lesson {
+    """
+
+    This virtual field will be resolved in one of the following ways (in this order):
+    1. Execution of 'labelResolver' set on the Lesson List config, or
+    2. As an alias to the field set on 'labelField' in the Lesson List config, or
+    3. As an alias to a 'name' field on the Lesson List (if one exists), or
+    4. As an alias to the 'id' field on the Lesson List.
+    """
+    _label_: String
+    artist: Artist
+    category: Category
+    createdAt: DateTime
+    createdBy: User
+    id: ID!
+    image: Image
+    name: String
+    public: Boolean
+    rating: Int
+    sound: Sound
+    subtitle: Subtitle
+    updatedAt: DateTime
+    updatedBy: User
+}
+
+" A keystone list "
+type Meaning {
+    _definitionsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortDefinitionsBy!], where: DefinitionWhereInput): _QueryMeta
+    """
+
+    This virtual field will be resolved in one of the following ways (in this order):
+    1. Execution of 'labelResolver' set on the Meaning List config, or
+    2. As an alias to the field set on 'labelField' in the Meaning List config, or
+    3. As an alias to a 'name' field on the Meaning List (if one exists), or
+    4. As an alias to the 'id' field on the Meaning List.
+    """
+    _label_: String
+    definitions(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortDefinitionsBy!], where: DefinitionWhereInput): [Definition!]!
+    id: ID!
+    partOfSpeech: String
+    word: Word
+}
+
+type Mutation {
+    " Authenticate and generate a token for a User with the Password Authentication Strategy. "
+    authenticateUserWithPassword(email: String, password: String): authenticateUserOutput
+    " Create a single Artist item. "
+    createArtist(data: ArtistCreateInput): Artist
+    " Create multiple Artist items. "
+    createArtists(data: [ArtistsCreateInput]): [Artist]
+    " Create multiple Category items. "
+    createCategories(data: [CategoriesCreateInput]): [Category]
+    " Create a single Category item. "
+    createCategory(data: CategoryCreateInput): Category
+    " Create a single Definition item. "
+    createDefinition(data: DefinitionCreateInput): Definition
+    " Create multiple Definition items. "
+    createDefinitions(data: [DefinitionsCreateInput]): [Definition]
+    " Create a single Image item. "
+    createImage(data: ImageCreateInput): Image
+    " Create multiple Image items. "
+    createImages(data: [ImagesCreateInput]): [Image]
+    " Create a single Lesson item. "
+    createLesson(data: LessonCreateInput): Lesson
+    " Create multiple Lesson items. "
+    createLessons(data: [LessonsCreateInput]): [Lesson]
+    " Create a single Meaning item. "
+    createMeaning(data: MeaningCreateInput): Meaning
+    " Create multiple Meaning items. "
+    createMeanings(data: [MeaningsCreateInput]): [Meaning]
+    " Create a single Phonetic item. "
+    createPhonetic(data: PhoneticCreateInput): Phonetic
+    " Create multiple Phonetic items. "
+    createPhonetics(data: [PhoneticsCreateInput]): [Phonetic]
+    " Create a single Sound item. "
+    createSound(data: SoundCreateInput): Sound
+    " Create multiple Sound items. "
+    createSounds(data: [SoundsCreateInput]): [Sound]
+    " Create a single Subtitle item. "
+    createSubtitle(data: SubtitleCreateInput): Subtitle
+    " Create multiple Subtitle items. "
+    createSubtitles(data: [SubtitlesCreateInput]): [Subtitle]
+    " Create a single Synonym item. "
+    createSynonym(data: SynonymCreateInput): Synonym
+    " Create multiple Synonym items. "
+    createSynonyms(data: [SynonymsCreateInput]): [Synonym]
+    " Create a single User item. "
+    createUser(data: UserCreateInput): User
+    " Create multiple User items. "
+    createUsers(data: [UsersCreateInput]): [User]
+    " Create a single Word item. "
+    createWord(data: WordCreateInput): Word
+    " Create multiple Word items. "
+    createWords(data: [WordsCreateInput]): [Word]
+    " Delete a single Artist item by ID. "
+    deleteArtist(id: ID!): Artist
+    " Delete multiple Artist items by ID. "
+    deleteArtists(ids: [ID!]): [Artist]
+    " Delete multiple Category items by ID. "
+    deleteCategories(ids: [ID!]): [Category]
+    " Delete a single Category item by ID. "
+    deleteCategory(id: ID!): Category
+    " Delete a single Definition item by ID. "
+    deleteDefinition(id: ID!): Definition
+    " Delete multiple Definition items by ID. "
+    deleteDefinitions(ids: [ID!]): [Definition]
+    " Delete a single Image item by ID. "
+    deleteImage(id: ID!): Image
+    " Delete multiple Image items by ID. "
+    deleteImages(ids: [ID!]): [Image]
+    " Delete a single Lesson item by ID. "
+    deleteLesson(id: ID!): Lesson
+    " Delete multiple Lesson items by ID. "
+    deleteLessons(ids: [ID!]): [Lesson]
+    " Delete a single Meaning item by ID. "
+    deleteMeaning(id: ID!): Meaning
+    " Delete multiple Meaning items by ID. "
+    deleteMeanings(ids: [ID!]): [Meaning]
+    " Delete a single Phonetic item by ID. "
+    deletePhonetic(id: ID!): Phonetic
+    " Delete multiple Phonetic items by ID. "
+    deletePhonetics(ids: [ID!]): [Phonetic]
+    " Delete a single Sound item by ID. "
+    deleteSound(id: ID!): Sound
+    " Delete multiple Sound items by ID. "
+    deleteSounds(ids: [ID!]): [Sound]
+    " Delete a single Subtitle item by ID. "
+    deleteSubtitle(id: ID!): Subtitle
+    " Delete multiple Subtitle items by ID. "
+    deleteSubtitles(ids: [ID!]): [Subtitle]
+    " Delete a single Synonym item by ID. "
+    deleteSynonym(id: ID!): Synonym
+    " Delete multiple Synonym items by ID. "
+    deleteSynonyms(ids: [ID!]): [Synonym]
+    " Delete a single User item by ID. "
+    deleteUser(id: ID!): User
+    " Delete multiple User items by ID. "
+    deleteUsers(ids: [ID!]): [User]
+    " Delete a single Word item by ID. "
+    deleteWord(id: ID!): Word
+    " Delete multiple Word items by ID. "
+    deleteWords(ids: [ID!]): [Word]
+    downloadVideo(fileName: String!, url: String!): Sound
+    unauthenticateUser: unauthenticateUserOutput
+    " Update a single Artist item by ID. "
+    updateArtist(data: ArtistUpdateInput, id: ID!): Artist
+    " Update multiple Artist items by ID. "
+    updateArtists(data: [ArtistsUpdateInput]): [Artist]
+    updateAuthenticatedUser(data: UserUpdateInput): User
+    " Update multiple Category items by ID. "
+    updateCategories(data: [CategoriesUpdateInput]): [Category]
+    " Update a single Category item by ID. "
+    updateCategory(data: CategoryUpdateInput, id: ID!): Category
+    " Update a single Definition item by ID. "
+    updateDefinition(data: DefinitionUpdateInput, id: ID!): Definition
+    " Update multiple Definition items by ID. "
+    updateDefinitions(data: [DefinitionsUpdateInput]): [Definition]
+    " Update a single Image item by ID. "
+    updateImage(data: ImageUpdateInput, id: ID!): Image
+    " Update multiple Image items by ID. "
+    updateImages(data: [ImagesUpdateInput]): [Image]
+    " Update a single Lesson item by ID. "
+    updateLesson(data: LessonUpdateInput, id: ID!): Lesson
+    " Update multiple Lesson items by ID. "
+    updateLessons(data: [LessonsUpdateInput]): [Lesson]
+    " Update a single Meaning item by ID. "
+    updateMeaning(data: MeaningUpdateInput, id: ID!): Meaning
+    " Update multiple Meaning items by ID. "
+    updateMeanings(data: [MeaningsUpdateInput]): [Meaning]
+    " Update a single Phonetic item by ID. "
+    updatePhonetic(data: PhoneticUpdateInput, id: ID!): Phonetic
+    " Update multiple Phonetic items by ID. "
+    updatePhonetics(data: [PhoneticsUpdateInput]): [Phonetic]
+    " Update a single Sound item by ID. "
+    updateSound(data: SoundUpdateInput, id: ID!): Sound
+    " Update multiple Sound items by ID. "
+    updateSounds(data: [SoundsUpdateInput]): [Sound]
+    " Update a single Subtitle item by ID. "
+    updateSubtitle(data: SubtitleUpdateInput, id: ID!): Subtitle
+    " Update multiple Subtitle items by ID. "
+    updateSubtitles(data: [SubtitlesUpdateInput]): [Subtitle]
+    " Update a single Synonym item by ID. "
+    updateSynonym(data: SynonymUpdateInput, id: ID!): Synonym
+    " Update multiple Synonym items by ID. "
+    updateSynonyms(data: [SynonymsUpdateInput]): [Synonym]
+    " Update a single User item by ID. "
+    updateUser(data: UserUpdateInput, id: ID!): User
+    " Update multiple User items by ID. "
+    updateUsers(data: [UsersUpdateInput]): [User]
+    " Update a single Word item by ID. "
+    updateWord(data: WordUpdateInput, id: ID!): Word
+    " Update multiple Word items by ID. "
+    updateWords(data: [WordsUpdateInput]): [Word]
+}
+
+" A keystone list "
+type Phonetic {
+    """
+
+    This virtual field will be resolved in one of the following ways (in this order):
+    1. Execution of 'labelResolver' set on the Phonetic List config, or
+    2. As an alias to the field set on 'labelField' in the Phonetic List config, or
+    3. As an alias to a 'name' field on the Phonetic List (if one exists), or
+    4. As an alias to the 'id' field on the Phonetic List.
+    """
+    _label_: String
+    audio: String
+    id: ID!
+    text: String
+    word: Word
+}
+
+type Query {
+    " Search for the Artist item with the matching ID. "
+    Artist(where: ArtistWhereUniqueInput!): Artist
+    " Search for the Category item with the matching ID. "
+    Category(where: CategoryWhereUniqueInput!): Category
+    " Search for the Definition item with the matching ID. "
+    Definition(where: DefinitionWhereUniqueInput!): Definition
+    " Search for the Image item with the matching ID. "
+    Image(where: ImageWhereUniqueInput!): Image
+    " Search for the Lesson item with the matching ID. "
+    Lesson(where: LessonWhereUniqueInput!): Lesson
+    " Search for the Meaning item with the matching ID. "
+    Meaning(where: MeaningWhereUniqueInput!): Meaning
+    " Search for the Phonetic item with the matching ID. "
+    Phonetic(where: PhoneticWhereUniqueInput!): Phonetic
+    " Search for the Sound item with the matching ID. "
+    Sound(where: SoundWhereUniqueInput!): Sound
+    " Search for the Subtitle item with the matching ID. "
+    Subtitle(where: SubtitleWhereUniqueInput!): Subtitle
+    " Search for the Synonym item with the matching ID. "
+    Synonym(where: SynonymWhereUniqueInput!): Synonym
+    " Search for the User item with the matching ID. "
+    User(where: UserWhereUniqueInput!): User
+    " Search for the Word item with the matching ID. "
+    Word(where: WordWhereUniqueInput!): Word
+    " Retrieve the meta-data for the Artist list. "
+    _ArtistsMeta: _ListMeta
+    " Retrieve the meta-data for the Category list. "
+    _CategoriesMeta: _ListMeta
+    " Retrieve the meta-data for the Definition list. "
+    _DefinitionsMeta: _ListMeta
+    " Retrieve the meta-data for the Image list. "
+    _ImagesMeta: _ListMeta
+    " Retrieve the meta-data for the Lesson list. "
+    _LessonsMeta: _ListMeta
+    " Retrieve the meta-data for the Meaning list. "
+    _MeaningsMeta: _ListMeta
+    " Retrieve the meta-data for the Phonetic list. "
+    _PhoneticsMeta: _ListMeta
+    " Retrieve the meta-data for the Sound list. "
+    _SoundsMeta: _ListMeta
+    " Retrieve the meta-data for the Subtitle list. "
+    _SubtitlesMeta: _ListMeta
+    " Retrieve the meta-data for the Synonym list. "
+    _SynonymsMeta: _ListMeta
+    " Retrieve the meta-data for the User list. "
+    _UsersMeta: _ListMeta
+    " Retrieve the meta-data for the Word list. "
+    _WordsMeta: _ListMeta
+    " Perform a meta-query on all Artist items which match the where clause. "
+    _allArtistsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortArtistsBy!], where: ArtistWhereInput): _QueryMeta
+    " Perform a meta-query on all Category items which match the where clause. "
+    _allCategoriesMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortCategoriesBy!], where: CategoryWhereInput): _QueryMeta
+    " Perform a meta-query on all Definition items which match the where clause. "
+    _allDefinitionsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortDefinitionsBy!], where: DefinitionWhereInput): _QueryMeta
+    " Perform a meta-query on all Image items which match the where clause. "
+    _allImagesMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortImagesBy!], where: ImageWhereInput): _QueryMeta
+    " Perform a meta-query on all Lesson items which match the where clause. "
+    _allLessonsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortLessonsBy!], where: LessonWhereInput): _QueryMeta
+    " Perform a meta-query on all Meaning items which match the where clause. "
+    _allMeaningsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortMeaningsBy!], where: MeaningWhereInput): _QueryMeta
+    " Perform a meta-query on all Phonetic items which match the where clause. "
+    _allPhoneticsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortPhoneticsBy!], where: PhoneticWhereInput): _QueryMeta
+    " Perform a meta-query on all Sound items which match the where clause. "
+    _allSoundsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortSoundsBy!], where: SoundWhereInput): _QueryMeta
+    " Perform a meta-query on all Subtitle items which match the where clause. "
+    _allSubtitlesMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortSubtitlesBy!], where: SubtitleWhereInput): _QueryMeta
+    " Perform a meta-query on all Synonym items which match the where clause. "
+    _allSynonymsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortSynonymsBy!], where: SynonymWhereInput): _QueryMeta
+    " Perform a meta-query on all User items which match the where clause. "
+    _allUsersMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortUsersBy!], where: UserWhereInput): _QueryMeta
+    " Perform a meta-query on all Word items which match the where clause. "
+    _allWordsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortWordsBy!], where: WordWhereInput): _QueryMeta
+    " Retrieve the meta-data for all lists. "
+    _ksListsMeta(where: _ksListsMetaInput): [_ListMeta]
+    " Search for all Artist items which match the where clause. "
+    allArtists(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortArtistsBy!], where: ArtistWhereInput): [Artist]
+    " Search for all Category items which match the where clause. "
+    allCategories(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortCategoriesBy!], where: CategoryWhereInput): [Category]
+    " Search for all Definition items which match the where clause. "
+    allDefinitions(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortDefinitionsBy!], where: DefinitionWhereInput): [Definition]
+    " Search for all Image items which match the where clause. "
+    allImages(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortImagesBy!], where: ImageWhereInput): [Image]
+    " Search for all Lesson items which match the where clause. "
+    allLessons(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortLessonsBy!], where: LessonWhereInput): [Lesson]
+    " Search for all Meaning items which match the where clause. "
+    allMeanings(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortMeaningsBy!], where: MeaningWhereInput): [Meaning]
+    " Search for all Phonetic items which match the where clause. "
+    allPhonetics(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortPhoneticsBy!], where: PhoneticWhereInput): [Phonetic]
+    " Search for all Sound items which match the where clause. "
+    allSounds(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortSoundsBy!], where: SoundWhereInput): [Sound]
+    " Search for all Subtitle items which match the where clause. "
+    allSubtitles(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortSubtitlesBy!], where: SubtitleWhereInput): [Subtitle]
+    " Search for all Synonym items which match the where clause. "
+    allSynonyms(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortSynonymsBy!], where: SynonymWhereInput): [Synonym]
+    " Search for all User items which match the where clause. "
+    allUsers(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortUsersBy!], where: UserWhereInput): [User]
+    " Search for all Word items which match the where clause. "
+    allWords(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortWordsBy!], where: WordWhereInput): [Word]
+    "The version of the Keystone application serving this API."
+    appVersion: String
+    authenticatedUser: User
+    getDefinition(lang: String, word: String!): GetDefinitionResponse
+}
+
+" A keystone list "
+type Sound {
+    """
+
+    This virtual field will be resolved in one of the following ways (in this order):
+    1. Execution of 'labelResolver' set on the Sound List config, or
+    2. As an alias to the field set on 'labelField' in the Sound List config, or
+    3. As an alias to a 'name' field on the Sound List (if one exists), or
+    4. As an alias to the 'id' field on the Sound List.
+    """
+    _label_: String
+    createdAt: DateTime
+    createdBy: User
+    duration: String
+    encoding: String
+    file: File
+    filePath: String
+    id: ID!
+    mimetype: String
+    name: String
+    size: String
+    updatedAt: DateTime
+    updatedBy: User
+    url: String
+}
+
+" A keystone list "
+type Subtitle {
+    """
+
+    This virtual field will be resolved in one of the following ways (in this order):
+    1. Execution of 'labelResolver' set on the Subtitle List config, or
+    2. As an alias to the field set on 'labelField' in the Subtitle List config, or
+    3. As an alias to a 'name' field on the Subtitle List (if one exists), or
+    4. As an alias to the 'id' field on the Subtitle List.
+    """
+    _label_: String
+    createdAt: DateTime
+    createdBy: User
+    encoding: String
+    file: File
+    filePath: String
+    id: ID!
+    mimetype: String
+    name: String
+    size: String
+    subtitles: String
+    updatedAt: DateTime
+    updatedBy: User
+    url: String
+}
+
+" A keystone list "
+type Synonym {
+    """
+
+    This virtual field will be resolved in one of the following ways (in this order):
+    1. Execution of 'labelResolver' set on the Synonym List config, or
+    2. As an alias to the field set on 'labelField' in the Synonym List config, or
+    3. As an alias to a 'name' field on the Synonym List (if one exists), or
+    4. As an alias to the 'id' field on the Synonym List.
+    """
+    _label_: String
+    definition: Definition
+    id: ID!
+    name: String
+}
+
+" A keystone list "
+type User {
+    """
+
+    This virtual field will be resolved in one of the following ways (in this order):
+    1. Execution of 'labelResolver' set on the User List config, or
+    2. As an alias to the field set on 'labelField' in the User List config, or
+    3. As an alias to a 'name' field on the User List (if one exists), or
+    4. As an alias to the 'id' field on the User List.
+    """
+    _label_: String
+    email: String
+    id: ID!
+    isAdmin: Boolean
+    name: String
+    password_is_set: Boolean
+}
+
+" A keystone list "
+type Word {
+    """
+
+    This virtual field will be resolved in one of the following ways (in this order):
+    1. Execution of 'labelResolver' set on the Word List config, or
+    2. As an alias to the field set on 'labelField' in the Word List config, or
+    3. As an alias to a 'name' field on the Word List (if one exists), or
+    4. As an alias to the 'id' field on the Word List.
+    """
+    _label_: String
+    _meaningsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortMeaningsBy!], where: MeaningWhereInput): _QueryMeta
+    _phoneticsMeta(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortPhoneticsBy!], where: PhoneticWhereInput): _QueryMeta
+    id: ID!
+    meanings(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortMeaningsBy!], where: MeaningWhereInput): [Meaning!]!
+    phonetics(first: Int, orderBy: String, search: String, skip: Int, sortBy: [SortPhoneticsBy!], where: PhoneticWhereInput): [Phonetic!]!
+    word: String
+}
+
+type _ListAccess {
+    """
+
+    Access Control settings for the currently logged in (or anonymous)
+    user when performing 'auth' operations.
+    """
+    auth: JSON
+    """
+
+    Access Control settings for the currently logged in (or anonymous)
+    user when performing 'create' operations.
+    NOTE: 'create' can only return a Boolean.
+    It is not possible to specify a declarative Where clause for this
+    operation
+    """
+    create: Boolean
+    """
+
+    Access Control settings for the currently logged in (or anonymous)
+    user when performing 'delete' operations.
+    """
+    delete: JSON
+    """
+
+    Access Control settings for the currently logged in (or anonymous)
+    user when performing 'read' operations.
+    """
+    read: JSON
+    """
+
+    Access Control settings for the currently logged in (or anonymous)
+    user when performing 'update' operations.
+    """
+    update: JSON
+}
+
+type _ListInputTypes {
+    "Create mutation input type name"
+    createInput: String
+    "Create many mutation input type name"
+    createManyInput: String
+    "Update mutation name input"
+    updateInput: String
+    "Update many mutation name input"
+    updateManyInput: String
+    "Input type for matching multiple items"
+    whereInput: String
+    "Input type for matching a unique item"
+    whereUniqueInput: String
+}
+
+type _ListMeta {
+    "Access control configuration for the currently authenticated request"
+    access: _ListAccess
+    "The list's user-facing description"
+    description: String
+    "The Keystone list key"
+    key: String
+    "The list's display name in the Admin UI"
+    label: String
+    "The Keystone List name"
+    name: String @deprecated(reason : "Use `key` instead")
+    "The list's data path"
+    path: String
+    "The list's plural display name"
+    plural: String
+    "Information on the generated GraphQL schema"
+    schema: _ListSchema
+    "The list's singular display name"
+    singular: String
+}
+
+type _ListMutations {
+    "Create mutation name"
+    create: String
+    "Create many mutation name"
+    createMany: String
+    "Delete mutation name"
+    delete: String
+    "Delete many mutation name"
+    deleteMany: String
+    "Update mutation name"
+    update: String
+    "Update many mutation name"
+    updateMany: String
+}
+
+type _ListQueries {
+    "Single-item query name"
+    item: String
+    "All-items query name"
+    list: String
+    "List metadata query name"
+    meta: String
+}
+
+type _ListSchema {
+    "Information about fields defined on this list"
+    fields(where: _ListSchemaFieldsInput): [_ListSchemaFields]
+    "Top-level GraphQL input types"
+    inputTypes: _ListInputTypes
+    "Top-level GraphQL mutation names"
+    mutations: _ListMutations
+    """
+
+    Top level GraphQL query names which either return this type, or
+    provide aggregate information about this type
+    """
+    queries: _ListQueries
+    """
+
+    Information about fields on other types which return this type, or
+    provide aggregate information about this type
+    """
+    relatedFields: [_ListSchemaRelatedFields]
+    "The typename as used in GraphQL queries"
+    type: String
+}
+
+type _ListSchemaFields {
+    "The name of the field in its list"
+    name: String @deprecated(reason : "Use `path` instead")
+    "The path of the field in its list"
+    path: String
+    "The field type (ie, Checkbox, Text, etc)"
+    type: String
+}
+
+type _ListSchemaRelatedFields {
+    "A list of GraphQL field names"
+    fields: [String]
+    "The typename as used in GraphQL queries"
+    type: String
+}
+
+type _QueryMeta {
+    count: Int
+}
+
+type authenticateUserOutput {
+    " Retrieve information on the newly authenticated User here. "
+    item: User
+    " Used to make subsequent authenticated requests by setting this token in a header: 'Authorization: Bearer <token>'. "
+    token: String
+}
+
+type unauthenticateUserOutput {
+    """
+
+    `true` when unauthentication succeeds.
+    NOTE: unauthentication always succeeds when the request has an invalid or missing authentication token.
+    """
+    success: Boolean
+}
+
+enum CacheControlScope {
+    PRIVATE
+    PUBLIC
+}
+
+enum SortArtistsBy {
+    createdAt_ASC
+    createdAt_DESC
+    createdBy_ASC
+    createdBy_DESC
+    id_ASC
+    id_DESC
+    lessons_ASC
+    lessons_DESC
+    name_ASC
+    name_DESC
+    updatedAt_ASC
+    updatedAt_DESC
+    updatedBy_ASC
+    updatedBy_DESC
+}
+
+enum SortCategoriesBy {
+    createdAt_ASC
+    createdAt_DESC
+    createdBy_ASC
+    createdBy_DESC
+    id_ASC
+    id_DESC
+    lessons_ASC
+    lessons_DESC
+    name_ASC
+    name_DESC
+    public_ASC
+    public_DESC
+    updatedAt_ASC
+    updatedAt_DESC
+    updatedBy_ASC
+    updatedBy_DESC
+}
+
+enum SortDefinitionsBy {
+    definition_ASC
+    definition_DESC
+    example_ASC
+    example_DESC
+    id_ASC
+    id_DESC
+    meaning_ASC
+    meaning_DESC
+    synonyms_ASC
+    synonyms_DESC
+}
+
+enum SortImagesBy {
+    createdAt_ASC
+    createdAt_DESC
+    createdBy_ASC
+    createdBy_DESC
+    encoding_ASC
+    encoding_DESC
+    id_ASC
+    id_DESC
+    mimetype_ASC
+    mimetype_DESC
+    name_ASC
+    name_DESC
+    size_ASC
+    size_DESC
+    updatedAt_ASC
+    updatedAt_DESC
+    updatedBy_ASC
+    updatedBy_DESC
+}
+
+enum SortLessonsBy {
+    artist_ASC
+    artist_DESC
+    category_ASC
+    category_DESC
+    createdAt_ASC
+    createdAt_DESC
+    createdBy_ASC
+    createdBy_DESC
+    id_ASC
+    id_DESC
+    image_ASC
+    image_DESC
+    name_ASC
+    name_DESC
+    public_ASC
+    public_DESC
+    rating_ASC
+    rating_DESC
+    sound_ASC
+    sound_DESC
+    subtitle_ASC
+    subtitle_DESC
+    updatedAt_ASC
+    updatedAt_DESC
+    updatedBy_ASC
+    updatedBy_DESC
+}
+
+enum SortMeaningsBy {
+    definitions_ASC
+    definitions_DESC
+    id_ASC
+    id_DESC
+    partOfSpeech_ASC
+    partOfSpeech_DESC
+    word_ASC
+    word_DESC
+}
+
+enum SortPhoneticsBy {
+    audio_ASC
+    audio_DESC
+    id_ASC
+    id_DESC
+    text_ASC
+    text_DESC
+    word_ASC
+    word_DESC
+}
+
+enum SortSoundsBy {
+    createdAt_ASC
+    createdAt_DESC
+    createdBy_ASC
+    createdBy_DESC
+    duration_ASC
+    duration_DESC
+    encoding_ASC
+    encoding_DESC
+    id_ASC
+    id_DESC
+    mimetype_ASC
+    mimetype_DESC
+    name_ASC
+    name_DESC
+    size_ASC
+    size_DESC
+    updatedAt_ASC
+    updatedAt_DESC
+    updatedBy_ASC
+    updatedBy_DESC
+}
+
+enum SortSubtitlesBy {
+    createdAt_ASC
+    createdAt_DESC
+    createdBy_ASC
+    createdBy_DESC
+    encoding_ASC
+    encoding_DESC
+    id_ASC
+    id_DESC
+    mimetype_ASC
+    mimetype_DESC
+    name_ASC
+    name_DESC
+    size_ASC
+    size_DESC
+    subtitles_ASC
+    subtitles_DESC
+    updatedAt_ASC
+    updatedAt_DESC
+    updatedBy_ASC
+    updatedBy_DESC
+}
+
+enum SortSynonymsBy {
+    definition_ASC
+    definition_DESC
+    id_ASC
+    id_DESC
+    name_ASC
+    name_DESC
+}
+
+enum SortUsersBy {
+    email_ASC
+    email_DESC
+    id_ASC
+    id_DESC
+    isAdmin_ASC
+    isAdmin_DESC
+    name_ASC
+    name_DESC
+}
+
+enum SortWordsBy {
+    id_ASC
+    id_DESC
+    meanings_ASC
+    meanings_DESC
+    phonetics_ASC
+    phonetics_DESC
+    word_ASC
+    word_DESC
+}
+
+input ArtistCreateInput {
+    lessons: LessonRelateToManyInput
+    name: String
+}
+
+input ArtistRelateToOneInput {
+    connect: ArtistWhereUniqueInput
+    create: ArtistCreateInput
+    disconnect: ArtistWhereUniqueInput
+    disconnectAll: Boolean
+}
+
+input ArtistUpdateInput {
+    lessons: LessonRelateToManyInput
+    name: String
+}
+
+input ArtistWhereInput {
+    AND: [ArtistWhereInput]
+    OR: [ArtistWhereInput]
+    createdAt: DateTime
+    createdAt_gt: DateTime
+    createdAt_gte: DateTime
+    createdAt_in: [DateTime]
+    createdAt_lt: DateTime
+    createdAt_lte: DateTime
+    createdAt_not: DateTime
+    createdAt_not_in: [DateTime]
+    createdBy: UserWhereInput
+    createdBy_is_null: Boolean
+    id: ID
+    id_in: [ID]
+    id_not: ID
+    id_not_in: [ID]
+    " condition must be true for all nodes "
+    lessons_every: LessonWhereInput
+    " condition must be false for all nodes "
+    lessons_none: LessonWhereInput
+    " condition must be true for at least 1 node "
+    lessons_some: LessonWhereInput
+    name: String
+    name_contains: String
+    name_contains_i: String
+    name_ends_with: String
+    name_ends_with_i: String
+    name_i: String
+    name_in: [String]
+    name_not: String
+    name_not_contains: String
+    name_not_contains_i: String
+    name_not_ends_with: String
+    name_not_ends_with_i: String
+    name_not_i: String
+    name_not_in: [String]
+    name_not_starts_with: String
+    name_not_starts_with_i: String
+    name_starts_with: String
+    name_starts_with_i: String
+    updatedAt: DateTime
+    updatedAt_gt: DateTime
+    updatedAt_gte: DateTime
+    updatedAt_in: [DateTime]
+    updatedAt_lt: DateTime
+    updatedAt_lte: DateTime
+    updatedAt_not: DateTime
+    updatedAt_not_in: [DateTime]
+    updatedBy: UserWhereInput
+    updatedBy_is_null: Boolean
+}
+
+input ArtistWhereUniqueInput {
+    id: ID!
+}
+
+input ArtistsCreateInput {
+    data: ArtistCreateInput
+}
+
+input ArtistsUpdateInput {
+    data: ArtistUpdateInput
+    id: ID!
+}
+
+input CategoriesCreateInput {
+    data: CategoryCreateInput
+}
+
+input CategoriesUpdateInput {
+    data: CategoryUpdateInput
+    id: ID!
+}
+
+input CategoryCreateInput {
+    lessons: LessonRelateToManyInput
+    name: String
+    public: Boolean
+}
+
+input CategoryRelateToOneInput {
+    connect: CategoryWhereUniqueInput
+    create: CategoryCreateInput
+    disconnect: CategoryWhereUniqueInput
+    disconnectAll: Boolean
+}
+
+input CategoryUpdateInput {
+    lessons: LessonRelateToManyInput
+    name: String
+    public: Boolean
+}
+
+input CategoryWhereInput {
+    AND: [CategoryWhereInput]
+    OR: [CategoryWhereInput]
+    createdAt: DateTime
+    createdAt_gt: DateTime
+    createdAt_gte: DateTime
+    createdAt_in: [DateTime]
+    createdAt_lt: DateTime
+    createdAt_lte: DateTime
+    createdAt_not: DateTime
+    createdAt_not_in: [DateTime]
+    createdBy: UserWhereInput
+    createdBy_is_null: Boolean
+    id: ID
+    id_in: [ID]
+    id_not: ID
+    id_not_in: [ID]
+    " condition must be true for all nodes "
+    lessons_every: LessonWhereInput
+    " condition must be false for all nodes "
+    lessons_none: LessonWhereInput
+    " condition must be true for at least 1 node "
+    lessons_some: LessonWhereInput
+    name: String
+    name_contains: String
+    name_contains_i: String
+    name_ends_with: String
+    name_ends_with_i: String
+    name_i: String
+    name_in: [String]
+    name_not: String
+    name_not_contains: String
+    name_not_contains_i: String
+    name_not_ends_with: String
+    name_not_ends_with_i: String
+    name_not_i: String
+    name_not_in: [String]
+    name_not_starts_with: String
+    name_not_starts_with_i: String
+    name_starts_with: String
+    name_starts_with_i: String
+    public: Boolean
+    public_not: Boolean
+    updatedAt: DateTime
+    updatedAt_gt: DateTime
+    updatedAt_gte: DateTime
+    updatedAt_in: [DateTime]
+    updatedAt_lt: DateTime
+    updatedAt_lte: DateTime
+    updatedAt_not: DateTime
+    updatedAt_not_in: [DateTime]
+    updatedBy: UserWhereInput
+    updatedBy_is_null: Boolean
+}
+
+input CategoryWhereUniqueInput {
+    id: ID!
+}
+
+input DefinitionCreateInput {
+    definition: String
+    example: String
+    meaning: MeaningRelateToOneInput
+    synonyms: SynonymRelateToManyInput
+}
+
+input DefinitionRelateToManyInput {
+    connect: [DefinitionWhereUniqueInput]
+    create: [DefinitionCreateInput]
+    disconnect: [DefinitionWhereUniqueInput]
+    disconnectAll: Boolean
+}
+
+input DefinitionRelateToOneInput {
+    connect: DefinitionWhereUniqueInput
+    create: DefinitionCreateInput
+    disconnect: DefinitionWhereUniqueInput
+    disconnectAll: Boolean
+}
+
+input DefinitionUpdateInput {
+    definition: String
+    example: String
+    meaning: MeaningRelateToOneInput
+    synonyms: SynonymRelateToManyInput
+}
+
+input DefinitionWhereInput {
+    AND: [DefinitionWhereInput]
+    OR: [DefinitionWhereInput]
+    definition: String
+    definition_contains: String
+    definition_contains_i: String
+    definition_ends_with: String
+    definition_ends_with_i: String
+    definition_i: String
+    definition_in: [String]
+    definition_not: String
+    definition_not_contains: String
+    definition_not_contains_i: String
+    definition_not_ends_with: String
+    definition_not_ends_with_i: String
+    definition_not_i: String
+    definition_not_in: [String]
+    definition_not_starts_with: String
+    definition_not_starts_with_i: String
+    definition_starts_with: String
+    definition_starts_with_i: String
+    example: String
+    example_contains: String
+    example_contains_i: String
+    example_ends_with: String
+    example_ends_with_i: String
+    example_i: String
+    example_in: [String]
+    example_not: String
+    example_not_contains: String
+    example_not_contains_i: String
+    example_not_ends_with: String
+    example_not_ends_with_i: String
+    example_not_i: String
+    example_not_in: [String]
+    example_not_starts_with: String
+    example_not_starts_with_i: String
+    example_starts_with: String
+    example_starts_with_i: String
+    id: ID
+    id_in: [ID]
+    id_not: ID
+    id_not_in: [ID]
+    meaning: MeaningWhereInput
+    meaning_is_null: Boolean
+    " condition must be true for all nodes "
+    synonyms_every: SynonymWhereInput
+    " condition must be false for all nodes "
+    synonyms_none: SynonymWhereInput
+    " condition must be true for at least 1 node "
+    synonyms_some: SynonymWhereInput
+}
+
+input DefinitionWhereUniqueInput {
+    id: ID!
+}
+
+input DefinitionsCreateInput {
+    data: DefinitionCreateInput
+}
+
+input DefinitionsUpdateInput {
+    data: DefinitionUpdateInput
+    id: ID!
+}
+
+input ImageCreateInput {
+    encoding: String
+    file: Upload
+    mimetype: String
+    name: String
+    size: String
+}
+
+input ImageRelateToOneInput {
+    connect: ImageWhereUniqueInput
+    create: ImageCreateInput
+    disconnect: ImageWhereUniqueInput
+    disconnectAll: Boolean
+}
+
+input ImageUpdateInput {
+    encoding: String
+    file: Upload
+    mimetype: String
+    name: String
+    size: String
+}
+
+input ImageWhereInput {
+    AND: [ImageWhereInput]
+    OR: [ImageWhereInput]
+    createdAt: DateTime
+    createdAt_gt: DateTime
+    createdAt_gte: DateTime
+    createdAt_in: [DateTime]
+    createdAt_lt: DateTime
+    createdAt_lte: DateTime
+    createdAt_not: DateTime
+    createdAt_not_in: [DateTime]
+    createdBy: UserWhereInput
+    createdBy_is_null: Boolean
+    encoding: String
+    encoding_contains: String
+    encoding_contains_i: String
+    encoding_ends_with: String
+    encoding_ends_with_i: String
+    encoding_i: String
+    encoding_in: [String]
+    encoding_not: String
+    encoding_not_contains: String
+    encoding_not_contains_i: String
+    encoding_not_ends_with: String
+    encoding_not_ends_with_i: String
+    encoding_not_i: String
+    encoding_not_in: [String]
+    encoding_not_starts_with: String
+    encoding_not_starts_with_i: String
+    encoding_starts_with: String
+    encoding_starts_with_i: String
+    file: String
+    file_in: [String]
+    file_not: String
+    file_not_in: [String]
+    id: ID
+    id_in: [ID]
+    id_not: ID
+    id_not_in: [ID]
+    mimetype: String
+    mimetype_contains: String
+    mimetype_contains_i: String
+    mimetype_ends_with: String
+    mimetype_ends_with_i: String
+    mimetype_i: String
+    mimetype_in: [String]
+    mimetype_not: String
+    mimetype_not_contains: String
+    mimetype_not_contains_i: String
+    mimetype_not_ends_with: String
+    mimetype_not_ends_with_i: String
+    mimetype_not_i: String
+    mimetype_not_in: [String]
+    mimetype_not_starts_with: String
+    mimetype_not_starts_with_i: String
+    mimetype_starts_with: String
+    mimetype_starts_with_i: String
+    name: String
+    name_contains: String
+    name_contains_i: String
+    name_ends_with: String
+    name_ends_with_i: String
+    name_i: String
+    name_in: [String]
+    name_not: String
+    name_not_contains: String
+    name_not_contains_i: String
+    name_not_ends_with: String
+    name_not_ends_with_i: String
+    name_not_i: String
+    name_not_in: [String]
+    name_not_starts_with: String
+    name_not_starts_with_i: String
+    name_starts_with: String
+    name_starts_with_i: String
+    size: String
+    size_contains: String
+    size_contains_i: String
+    size_ends_with: String
+    size_ends_with_i: String
+    size_i: String
+    size_in: [String]
+    size_not: String
+    size_not_contains: String
+    size_not_contains_i: String
+    size_not_ends_with: String
+    size_not_ends_with_i: String
+    size_not_i: String
+    size_not_in: [String]
+    size_not_starts_with: String
+    size_not_starts_with_i: String
+    size_starts_with: String
+    size_starts_with_i: String
+    updatedAt: DateTime
+    updatedAt_gt: DateTime
+    updatedAt_gte: DateTime
+    updatedAt_in: [DateTime]
+    updatedAt_lt: DateTime
+    updatedAt_lte: DateTime
+    updatedAt_not: DateTime
+    updatedAt_not_in: [DateTime]
+    updatedBy: UserWhereInput
+    updatedBy_is_null: Boolean
+}
+
+input ImageWhereUniqueInput {
+    id: ID!
+}
+
+input ImagesCreateInput {
+    data: ImageCreateInput
+}
+
+input ImagesUpdateInput {
+    data: ImageUpdateInput
+    id: ID!
+}
+
+input LessonCreateInput {
+    artist: ArtistRelateToOneInput
+    category: CategoryRelateToOneInput
+    image: ImageRelateToOneInput
+    name: String
+    public: Boolean
+    rating: Int
+    sound: SoundRelateToOneInput
+    subtitle: SubtitleRelateToOneInput
+}
+
+input LessonRelateToManyInput {
+    connect: [LessonWhereUniqueInput]
+    create: [LessonCreateInput]
+    disconnect: [LessonWhereUniqueInput]
+    disconnectAll: Boolean
+}
+
+input LessonUpdateInput {
+    artist: ArtistRelateToOneInput
+    category: CategoryRelateToOneInput
+    image: ImageRelateToOneInput
+    name: String
+    public: Boolean
+    rating: Int
+    sound: SoundRelateToOneInput
+    subtitle: SubtitleRelateToOneInput
+}
+
+input LessonWhereInput {
+    AND: [LessonWhereInput]
+    OR: [LessonWhereInput]
+    artist: ArtistWhereInput
+    artist_is_null: Boolean
+    category: CategoryWhereInput
+    category_is_null: Boolean
+    createdAt: DateTime
+    createdAt_gt: DateTime
+    createdAt_gte: DateTime
+    createdAt_in: [DateTime]
+    createdAt_lt: DateTime
+    createdAt_lte: DateTime
+    createdAt_not: DateTime
+    createdAt_not_in: [DateTime]
+    createdBy: UserWhereInput
+    createdBy_is_null: Boolean
+    id: ID
+    id_in: [ID]
+    id_not: ID
+    id_not_in: [ID]
+    image: ImageWhereInput
+    image_is_null: Boolean
+    name: String
+    name_contains: String
+    name_contains_i: String
+    name_ends_with: String
+    name_ends_with_i: String
+    name_i: String
+    name_in: [String]
+    name_not: String
+    name_not_contains: String
+    name_not_contains_i: String
+    name_not_ends_with: String
+    name_not_ends_with_i: String
+    name_not_i: String
+    name_not_in: [String]
+    name_not_starts_with: String
+    name_not_starts_with_i: String
+    name_starts_with: String
+    name_starts_with_i: String
+    public: Boolean
+    public_not: Boolean
+    rating: Int
+    rating_gt: Int
+    rating_gte: Int
+    rating_in: [Int]
+    rating_lt: Int
+    rating_lte: Int
+    rating_not: Int
+    rating_not_in: [Int]
+    sound: SoundWhereInput
+    sound_is_null: Boolean
+    subtitle: SubtitleWhereInput
+    subtitle_is_null: Boolean
+    updatedAt: DateTime
+    updatedAt_gt: DateTime
+    updatedAt_gte: DateTime
+    updatedAt_in: [DateTime]
+    updatedAt_lt: DateTime
+    updatedAt_lte: DateTime
+    updatedAt_not: DateTime
+    updatedAt_not_in: [DateTime]
+    updatedBy: UserWhereInput
+    updatedBy_is_null: Boolean
+}
+
+input LessonWhereUniqueInput {
+    id: ID!
+}
+
+input LessonsCreateInput {
+    data: LessonCreateInput
+}
+
+input LessonsUpdateInput {
+    data: LessonUpdateInput
+    id: ID!
+}
+
+input MeaningCreateInput {
+    definitions: DefinitionRelateToManyInput
+    partOfSpeech: String
+    word: WordRelateToOneInput
+}
+
+input MeaningRelateToManyInput {
+    connect: [MeaningWhereUniqueInput]
+    create: [MeaningCreateInput]
+    disconnect: [MeaningWhereUniqueInput]
+    disconnectAll: Boolean
+}
+
+input MeaningRelateToOneInput {
+    connect: MeaningWhereUniqueInput
+    create: MeaningCreateInput
+    disconnect: MeaningWhereUniqueInput
+    disconnectAll: Boolean
+}
+
+input MeaningUpdateInput {
+    definitions: DefinitionRelateToManyInput
+    partOfSpeech: String
+    word: WordRelateToOneInput
+}
+
+input MeaningWhereInput {
+    AND: [MeaningWhereInput]
+    OR: [MeaningWhereInput]
+    " condition must be true for all nodes "
+    definitions_every: DefinitionWhereInput
+    " condition must be false for all nodes "
+    definitions_none: DefinitionWhereInput
+    " condition must be true for at least 1 node "
+    definitions_some: DefinitionWhereInput
+    id: ID
+    id_in: [ID]
+    id_not: ID
+    id_not_in: [ID]
+    partOfSpeech: String
+    partOfSpeech_contains: String
+    partOfSpeech_contains_i: String
+    partOfSpeech_ends_with: String
+    partOfSpeech_ends_with_i: String
+    partOfSpeech_i: String
+    partOfSpeech_in: [String]
+    partOfSpeech_not: String
+    partOfSpeech_not_contains: String
+    partOfSpeech_not_contains_i: String
+    partOfSpeech_not_ends_with: String
+    partOfSpeech_not_ends_with_i: String
+    partOfSpeech_not_i: String
+    partOfSpeech_not_in: [String]
+    partOfSpeech_not_starts_with: String
+    partOfSpeech_not_starts_with_i: String
+    partOfSpeech_starts_with: String
+    partOfSpeech_starts_with_i: String
+    word: WordWhereInput
+    word_is_null: Boolean
+}
+
+input MeaningWhereUniqueInput {
+    id: ID!
+}
+
+input MeaningsCreateInput {
+    data: MeaningCreateInput
+}
+
+input MeaningsUpdateInput {
+    data: MeaningUpdateInput
+    id: ID!
+}
+
+input PhoneticCreateInput {
+    audio: String
+    text: String
+    word: WordRelateToOneInput
+}
+
+input PhoneticRelateToManyInput {
+    connect: [PhoneticWhereUniqueInput]
+    create: [PhoneticCreateInput]
+    disconnect: [PhoneticWhereUniqueInput]
+    disconnectAll: Boolean
+}
+
+input PhoneticUpdateInput {
+    audio: String
+    text: String
+    word: WordRelateToOneInput
+}
+
+input PhoneticWhereInput {
+    AND: [PhoneticWhereInput]
+    OR: [PhoneticWhereInput]
+    audio: String
+    audio_contains: String
+    audio_contains_i: String
+    audio_ends_with: String
+    audio_ends_with_i: String
+    audio_i: String
+    audio_in: [String]
+    audio_not: String
+    audio_not_contains: String
+    audio_not_contains_i: String
+    audio_not_ends_with: String
+    audio_not_ends_with_i: String
+    audio_not_i: String
+    audio_not_in: [String]
+    audio_not_starts_with: String
+    audio_not_starts_with_i: String
+    audio_starts_with: String
+    audio_starts_with_i: String
+    id: ID
+    id_in: [ID]
+    id_not: ID
+    id_not_in: [ID]
+    text: String
+    text_contains: String
+    text_contains_i: String
+    text_ends_with: String
+    text_ends_with_i: String
+    text_i: String
+    text_in: [String]
+    text_not: String
+    text_not_contains: String
+    text_not_contains_i: String
+    text_not_ends_with: String
+    text_not_ends_with_i: String
+    text_not_i: String
+    text_not_in: [String]
+    text_not_starts_with: String
+    text_not_starts_with_i: String
+    text_starts_with: String
+    text_starts_with_i: String
+    word: WordWhereInput
+    word_is_null: Boolean
+}
+
+input PhoneticWhereUniqueInput {
+    id: ID!
+}
+
+input PhoneticsCreateInput {
+    data: PhoneticCreateInput
+}
+
+input PhoneticsUpdateInput {
+    data: PhoneticUpdateInput
+    id: ID!
+}
+
+input SoundCreateInput {
+    duration: String
+    encoding: String
+    file: Upload
+    mimetype: String
+    name: String
+    size: String
+}
+
+input SoundRelateToOneInput {
+    connect: SoundWhereUniqueInput
+    create: SoundCreateInput
+    disconnect: SoundWhereUniqueInput
+    disconnectAll: Boolean
+}
+
+input SoundUpdateInput {
+    duration: String
+    encoding: String
+    file: Upload
+    mimetype: String
+    name: String
+    size: String
+}
+
+input SoundWhereInput {
+    AND: [SoundWhereInput]
+    OR: [SoundWhereInput]
+    createdAt: DateTime
+    createdAt_gt: DateTime
+    createdAt_gte: DateTime
+    createdAt_in: [DateTime]
+    createdAt_lt: DateTime
+    createdAt_lte: DateTime
+    createdAt_not: DateTime
+    createdAt_not_in: [DateTime]
+    createdBy: UserWhereInput
+    createdBy_is_null: Boolean
+    duration: String
+    duration_contains: String
+    duration_contains_i: String
+    duration_ends_with: String
+    duration_ends_with_i: String
+    duration_i: String
+    duration_in: [String]
+    duration_not: String
+    duration_not_contains: String
+    duration_not_contains_i: String
+    duration_not_ends_with: String
+    duration_not_ends_with_i: String
+    duration_not_i: String
+    duration_not_in: [String]
+    duration_not_starts_with: String
+    duration_not_starts_with_i: String
+    duration_starts_with: String
+    duration_starts_with_i: String
+    encoding: String
+    encoding_contains: String
+    encoding_contains_i: String
+    encoding_ends_with: String
+    encoding_ends_with_i: String
+    encoding_i: String
+    encoding_in: [String]
+    encoding_not: String
+    encoding_not_contains: String
+    encoding_not_contains_i: String
+    encoding_not_ends_with: String
+    encoding_not_ends_with_i: String
+    encoding_not_i: String
+    encoding_not_in: [String]
+    encoding_not_starts_with: String
+    encoding_not_starts_with_i: String
+    encoding_starts_with: String
+    encoding_starts_with_i: String
+    file: String
+    file_in: [String]
+    file_not: String
+    file_not_in: [String]
+    id: ID
+    id_in: [ID]
+    id_not: ID
+    id_not_in: [ID]
+    mimetype: String
+    mimetype_contains: String
+    mimetype_contains_i: String
+    mimetype_ends_with: String
+    mimetype_ends_with_i: String
+    mimetype_i: String
+    mimetype_in: [String]
+    mimetype_not: String
+    mimetype_not_contains: String
+    mimetype_not_contains_i: String
+    mimetype_not_ends_with: String
+    mimetype_not_ends_with_i: String
+    mimetype_not_i: String
+    mimetype_not_in: [String]
+    mimetype_not_starts_with: String
+    mimetype_not_starts_with_i: String
+    mimetype_starts_with: String
+    mimetype_starts_with_i: String
+    name: String
+    name_contains: String
+    name_contains_i: String
+    name_ends_with: String
+    name_ends_with_i: String
+    name_i: String
+    name_in: [String]
+    name_not: String
+    name_not_contains: String
+    name_not_contains_i: String
+    name_not_ends_with: String
+    name_not_ends_with_i: String
+    name_not_i: String
+    name_not_in: [String]
+    name_not_starts_with: String
+    name_not_starts_with_i: String
+    name_starts_with: String
+    name_starts_with_i: String
+    size: String
+    size_contains: String
+    size_contains_i: String
+    size_ends_with: String
+    size_ends_with_i: String
+    size_i: String
+    size_in: [String]
+    size_not: String
+    size_not_contains: String
+    size_not_contains_i: String
+    size_not_ends_with: String
+    size_not_ends_with_i: String
+    size_not_i: String
+    size_not_in: [String]
+    size_not_starts_with: String
+    size_not_starts_with_i: String
+    size_starts_with: String
+    size_starts_with_i: String
+    updatedAt: DateTime
+    updatedAt_gt: DateTime
+    updatedAt_gte: DateTime
+    updatedAt_in: [DateTime]
+    updatedAt_lt: DateTime
+    updatedAt_lte: DateTime
+    updatedAt_not: DateTime
+    updatedAt_not_in: [DateTime]
+    updatedBy: UserWhereInput
+    updatedBy_is_null: Boolean
+}
+
+input SoundWhereUniqueInput {
+    id: ID!
+}
+
+input SoundsCreateInput {
+    data: SoundCreateInput
+}
+
+input SoundsUpdateInput {
+    data: SoundUpdateInput
+    id: ID!
+}
+
+input SubtitleCreateInput {
+    encoding: String
+    file: Upload
+    mimetype: String
+    name: String
+    size: String
+    subtitles: String
+}
+
+input SubtitleRelateToOneInput {
+    connect: SubtitleWhereUniqueInput
+    create: SubtitleCreateInput
+    disconnect: SubtitleWhereUniqueInput
+    disconnectAll: Boolean
+}
+
+input SubtitleUpdateInput {
+    encoding: String
+    file: Upload
+    mimetype: String
+    name: String
+    size: String
+    subtitles: String
+}
+
+input SubtitleWhereInput {
+    AND: [SubtitleWhereInput]
+    OR: [SubtitleWhereInput]
+    createdAt: DateTime
+    createdAt_gt: DateTime
+    createdAt_gte: DateTime
+    createdAt_in: [DateTime]
+    createdAt_lt: DateTime
+    createdAt_lte: DateTime
+    createdAt_not: DateTime
+    createdAt_not_in: [DateTime]
+    createdBy: UserWhereInput
+    createdBy_is_null: Boolean
+    encoding: String
+    encoding_contains: String
+    encoding_contains_i: String
+    encoding_ends_with: String
+    encoding_ends_with_i: String
+    encoding_i: String
+    encoding_in: [String]
+    encoding_not: String
+    encoding_not_contains: String
+    encoding_not_contains_i: String
+    encoding_not_ends_with: String
+    encoding_not_ends_with_i: String
+    encoding_not_i: String
+    encoding_not_in: [String]
+    encoding_not_starts_with: String
+    encoding_not_starts_with_i: String
+    encoding_starts_with: String
+    encoding_starts_with_i: String
+    file: String
+    file_in: [String]
+    file_not: String
+    file_not_in: [String]
+    id: ID
+    id_in: [ID]
+    id_not: ID
+    id_not_in: [ID]
+    mimetype: String
+    mimetype_contains: String
+    mimetype_contains_i: String
+    mimetype_ends_with: String
+    mimetype_ends_with_i: String
+    mimetype_i: String
+    mimetype_in: [String]
+    mimetype_not: String
+    mimetype_not_contains: String
+    mimetype_not_contains_i: String
+    mimetype_not_ends_with: String
+    mimetype_not_ends_with_i: String
+    mimetype_not_i: String
+    mimetype_not_in: [String]
+    mimetype_not_starts_with: String
+    mimetype_not_starts_with_i: String
+    mimetype_starts_with: String
+    mimetype_starts_with_i: String
+    name: String
+    name_contains: String
+    name_contains_i: String
+    name_ends_with: String
+    name_ends_with_i: String
+    name_i: String
+    name_in: [String]
+    name_not: String
+    name_not_contains: String
+    name_not_contains_i: String
+    name_not_ends_with: String
+    name_not_ends_with_i: String
+    name_not_i: String
+    name_not_in: [String]
+    name_not_starts_with: String
+    name_not_starts_with_i: String
+    name_starts_with: String
+    name_starts_with_i: String
+    size: String
+    size_contains: String
+    size_contains_i: String
+    size_ends_with: String
+    size_ends_with_i: String
+    size_i: String
+    size_in: [String]
+    size_not: String
+    size_not_contains: String
+    size_not_contains_i: String
+    size_not_ends_with: String
+    size_not_ends_with_i: String
+    size_not_i: String
+    size_not_in: [String]
+    size_not_starts_with: String
+    size_not_starts_with_i: String
+    size_starts_with: String
+    size_starts_with_i: String
+    subtitles: String
+    subtitles_contains: String
+    subtitles_contains_i: String
+    subtitles_ends_with: String
+    subtitles_ends_with_i: String
+    subtitles_i: String
+    subtitles_in: [String]
+    subtitles_not: String
+    subtitles_not_contains: String
+    subtitles_not_contains_i: String
+    subtitles_not_ends_with: String
+    subtitles_not_ends_with_i: String
+    subtitles_not_i: String
+    subtitles_not_in: [String]
+    subtitles_not_starts_with: String
+    subtitles_not_starts_with_i: String
+    subtitles_starts_with: String
+    subtitles_starts_with_i: String
+    updatedAt: DateTime
+    updatedAt_gt: DateTime
+    updatedAt_gte: DateTime
+    updatedAt_in: [DateTime]
+    updatedAt_lt: DateTime
+    updatedAt_lte: DateTime
+    updatedAt_not: DateTime
+    updatedAt_not_in: [DateTime]
+    updatedBy: UserWhereInput
+    updatedBy_is_null: Boolean
+}
+
+input SubtitleWhereUniqueInput {
+    id: ID!
+}
+
+input SubtitlesCreateInput {
+    data: SubtitleCreateInput
+}
+
+input SubtitlesUpdateInput {
+    data: SubtitleUpdateInput
+    id: ID!
+}
+
+input SynonymCreateInput {
+    definition: DefinitionRelateToOneInput
+    name: String
+}
+
+input SynonymRelateToManyInput {
+    connect: [SynonymWhereUniqueInput]
+    create: [SynonymCreateInput]
+    disconnect: [SynonymWhereUniqueInput]
+    disconnectAll: Boolean
+}
+
+input SynonymUpdateInput {
+    definition: DefinitionRelateToOneInput
+    name: String
+}
+
+input SynonymWhereInput {
+    AND: [SynonymWhereInput]
+    OR: [SynonymWhereInput]
+    definition: DefinitionWhereInput
+    definition_is_null: Boolean
+    id: ID
+    id_in: [ID]
+    id_not: ID
+    id_not_in: [ID]
+    name: String
+    name_contains: String
+    name_contains_i: String
+    name_ends_with: String
+    name_ends_with_i: String
+    name_i: String
+    name_in: [String]
+    name_not: String
+    name_not_contains: String
+    name_not_contains_i: String
+    name_not_ends_with: String
+    name_not_ends_with_i: String
+    name_not_i: String
+    name_not_in: [String]
+    name_not_starts_with: String
+    name_not_starts_with_i: String
+    name_starts_with: String
+    name_starts_with_i: String
+}
+
+input SynonymWhereUniqueInput {
+    id: ID!
+}
+
+input SynonymsCreateInput {
+    data: SynonymCreateInput
+}
+
+input SynonymsUpdateInput {
+    data: SynonymUpdateInput
+    id: ID!
+}
+
+input UserCreateInput {
+    email: String
+    isAdmin: Boolean
+    name: String
+    password: String
+}
+
+input UserRelateToOneInput {
+    connect: UserWhereUniqueInput
+    create: UserCreateInput
+    disconnect: UserWhereUniqueInput
+    disconnectAll: Boolean
+}
+
+input UserUpdateInput {
+    email: String
+    isAdmin: Boolean
+    name: String
+    password: String
+}
+
+input UserWhereInput {
+    AND: [UserWhereInput]
+    OR: [UserWhereInput]
+    email: String
+    email_contains: String
+    email_contains_i: String
+    email_ends_with: String
+    email_ends_with_i: String
+    email_i: String
+    email_in: [String]
+    email_not: String
+    email_not_contains: String
+    email_not_contains_i: String
+    email_not_ends_with: String
+    email_not_ends_with_i: String
+    email_not_i: String
+    email_not_in: [String]
+    email_not_starts_with: String
+    email_not_starts_with_i: String
+    email_starts_with: String
+    email_starts_with_i: String
+    id: ID
+    id_in: [ID]
+    id_not: ID
+    id_not_in: [ID]
+    isAdmin: Boolean
+    isAdmin_not: Boolean
+    name: String
+    name_contains: String
+    name_contains_i: String
+    name_ends_with: String
+    name_ends_with_i: String
+    name_i: String
+    name_in: [String]
+    name_not: String
+    name_not_contains: String
+    name_not_contains_i: String
+    name_not_ends_with: String
+    name_not_ends_with_i: String
+    name_not_i: String
+    name_not_in: [String]
+    name_not_starts_with: String
+    name_not_starts_with_i: String
+    name_starts_with: String
+    name_starts_with_i: String
+    password_is_set: Boolean
+}
+
+input UserWhereUniqueInput {
+    id: ID!
+}
+
+input UsersCreateInput {
+    data: UserCreateInput
+}
+
+input UsersUpdateInput {
+    data: UserUpdateInput
+    id: ID!
+}
+
+input WordCreateInput {
+    meanings: MeaningRelateToManyInput
+    phonetics: PhoneticRelateToManyInput
+    word: String
+}
+
+input WordRelateToOneInput {
+    connect: WordWhereUniqueInput
+    create: WordCreateInput
+    disconnect: WordWhereUniqueInput
+    disconnectAll: Boolean
+}
+
+input WordUpdateInput {
+    meanings: MeaningRelateToManyInput
+    phonetics: PhoneticRelateToManyInput
+    word: String
+}
+
+input WordWhereInput {
+    AND: [WordWhereInput]
+    OR: [WordWhereInput]
+    id: ID
+    id_in: [ID]
+    id_not: ID
+    id_not_in: [ID]
+    " condition must be true for all nodes "
+    meanings_every: MeaningWhereInput
+    " condition must be false for all nodes "
+    meanings_none: MeaningWhereInput
+    " condition must be true for at least 1 node "
+    meanings_some: MeaningWhereInput
+    " condition must be true for all nodes "
+    phonetics_every: PhoneticWhereInput
+    " condition must be false for all nodes "
+    phonetics_none: PhoneticWhereInput
+    " condition must be true for at least 1 node "
+    phonetics_some: PhoneticWhereInput
+    word: String
+    word_contains: String
+    word_contains_i: String
+    word_ends_with: String
+    word_ends_with_i: String
+    word_i: String
+    word_in: [String]
+    word_not: String
+    word_not_contains: String
+    word_not_contains_i: String
+    word_not_ends_with: String
+    word_not_ends_with_i: String
+    word_not_i: String
+    word_not_in: [String]
+    word_not_starts_with: String
+    word_not_starts_with_i: String
+    word_starts_with: String
+    word_starts_with_i: String
+}
+
+input WordWhereUniqueInput {
+    id: ID!
+}
+
+input WordsCreateInput {
+    data: WordCreateInput
+}
+
+input WordsUpdateInput {
+    data: WordUpdateInput
+    id: ID!
+}
+
+input _ListSchemaFieldsInput {
+    type: String
+}
+
+input _ksListsMetaInput {
+    "Whether this is an auxiliary helper list"
+    auxiliary: Boolean
+    key: String
+}
+
+
+"DateTime custom scalar represents an ISO 8601 datetime string"
+scalar DateTime
+
+"The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."
+scalar JSON
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload

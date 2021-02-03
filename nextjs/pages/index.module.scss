@@ -1,0 +1,44 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+p,h1,h2,h3,h4,h5,h6{
+    margin:0;
+}
+
+.category{
+    .category-name{
+        font-size: 2rem;
+        padding:1rem 0;
+        font-weight: 500;
+    }
+
+    .lesson{
+        border-radius: 10px;
+        transition:all ease-in-out 250ms;
+
+        &:hover{
+            background:rgba(black,.05)
+        }
+        img{
+            width: 5rem;
+            max-height: 5rem;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .name{
+            font-size: 2rem;
+            font-weight: 300;
+        }
+
+        .singer{
+            font-size: 1.5rem;
+        }
+
+        .btn{
+            cursor:pointer;
+        }
+    }
+}

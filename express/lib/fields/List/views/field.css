@@ -1,0 +1,35 @@
+.sub-list{
+    max-height: 0;
+    transition:all ease-in-out 580ms;
+    overflow: hidden;
+}
+.sub-list.expanded{
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.sub-item{
+    display: flex;
+    padding:.5rem 0;
+    transition: all ease-in-out 320ms;
+}
+
+.sub-item:hover{
+    background: #e2e2e2;
+    border-radius: .5rem;
+}
+
+.sub-item .text{
+    padding-left: 1rem;
+}
+.sub-item .time{
+    width: 140px;
+    white-space: normal;
+}
+
+.sub-item .time{
+    padding-left: 1rem;
+    display: flex;
+    justify-content: space-between;
+    color: #7e7e7e;
+}
