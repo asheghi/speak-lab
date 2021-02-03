@@ -5,7 +5,6 @@ import React from "react";
 import DefaultErrorPage from 'next/error'
 import {fetchQuery} from "../../lib/Fetch";
 
-const STRAPI_BACKEND_URL = process.env.STRAPI_BACKEND_URL;
 const Lesson = ({lesson, baseUrlStorage, previous_lesson_id, next_lesson_id}) => {
     // This includes setting the noindex header because static files always return a status 200 but the rendered not found page page should obviously not be indexed
     if (!lesson) {
