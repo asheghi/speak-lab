@@ -105,7 +105,7 @@ export default function Home({categories}) {
                 </nav>
             </header>
             <div>
-                {categories && categories.length && categories.map((it, i) => <Category category={it} key={i}/>)}
+                {categories && categories.length > 0 ? categories.map((it, i) => <Category category={it} key={i}/>) : 'No Category yet.'}
             </div>
         </div>
     )
