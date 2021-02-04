@@ -75,7 +75,15 @@ export async function getStaticProps({params}) {
 }
 
 export async function getStaticPaths() {
-    const paths = [];
+    const query = `
+            query{
+              list : allCategories{
+                id
+              }
+            }
+            `;
+    const {list} = await fetchQuery(query)
+    const paths = list.map(it => ({params: {id: it.id}}));
     return {
         paths,
         fallback: true,

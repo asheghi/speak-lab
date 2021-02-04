@@ -90,18 +90,16 @@ export async function getStaticProps({params}) {
     }
 }
 
-
 export async function getStaticPaths() {
-    // Call an external API endpoint to get posts
-    // const res = await fetch(STRAPI_BACKEND_URL + '/lessons');
-    // const lessons = await res.json();
-
-    // Get the paths we want to pre-render based on posts
-    // const paths = lessons.map((it) => `/lessons/${it.id}`)
-    const paths = [];
-    // We'll pre-render only these paths at build time.
-    // { fallback: false } means other routes should 404.
-
+    const query = `
+            query{
+              list : allLessons{
+                id
+              }
+            }
+            `;
+    const {list} = await fetchQuery(query)
+    const paths = list.map(it => ({params: {id: it.id}}));
     return {
         paths,
         fallback: true,
