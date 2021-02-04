@@ -17,7 +17,7 @@ export function LessonItem(it, i) {
             </div>
         </div>
         <p className="ml-auto mr-3 text-muted">{duration && duration.length && duration.startsWith('00') ? duration.substr(3, duration.length) : duration}</p>
-        <Link href={'lessons/' + id}>
+        <Link href={'/lessons/' + id}>
             <div className="btn btn-outline-primary px-4 mr-2 rounded-pill">Listen</div>
         </Link>
     </div>

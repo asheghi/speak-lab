@@ -7,7 +7,7 @@ import {AuthSection, Category} from "../index";
 
 export default function ({category}) {
     if (!category) {
-        return (<h4 className="text-danger">Category not found</h4>)
+        return '';
     }
     return (
         <div className="index_page container mb-5">
