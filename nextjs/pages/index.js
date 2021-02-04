@@ -5,32 +5,45 @@ import './index.module.scss';
 import useAuth from "../hooks/useAuth";
 import {useState} from "react";
 
-function Category({category}) {
-    console.log('category is ', category);
+export function LessonItem(it, i) {
+    const {id, name, sound: {duration}, image: {url: imageUrl}} = it;
+    let artistName = it.artist ? it.artist.name : '';
+    return <div key={i} className="lesson d-flex align-items-center mb-3">
+        <img src={imageUrl}/>
+        <div className="ml-4">
+            <p className="name">{name}</p>
+            <div className="d-flex">
+                <p className="text-primary singer">{artistName}</p>
+            </div>
+        </div>
+        <p className="ml-auto mr-3 text-muted">{duration && duration.length && duration.startsWith('00') ? duration.substr(3, duration.length) : duration}</p>
+        <Link href={'lessons/' + id}>
+            <div className="btn btn-outline-primary px-4 mr-2 rounded-pill">Listen</div>
+        </Link>
+    </div>
+}
+
+export function Category({category,showAll}) {
+    if (!category) {
+        return '';
+    }
     const {name, lessons} = category;
     return (<div className="category">
-        <div className="category-name">{name}</div>
-        {lessons.map((it, i) => {
-            const {id, name, sound: {duration}, image: {url: imageUrl} } = it;
-            let artistName = it.artist ? it.artist.name : '';
-            return <div key={i} className="lesson d-flex align-items-center mb-3">
-                <img src={imageUrl}/>
-                <div className="ml-4">
-                    <p className="name">{name}</p>
-                    <div className="d-flex">
-                        <p className="text-primary singer">{artistName}</p>
-                    </div>
-                </div>
-                <p className="ml-auto mr-3 text-muted">{duration && duration.length && duration.startsWith('00') ? duration.substr(3, duration.length) : duration}</p>
-                <Link href={'lessons/' + id}>
-                    <div className="btn btn-outline-primary px-4 mr-2 rounded-pill">Listen</div>
-                </Link>
-            </div>
+        <div className="d-flex align-items-center">
+            <div className="category-name">{name}</div>
+            {!showAll && lessons.length > 4 && <div className="ml-auto mr-3 text-primary">
+                <a href={'/category/'+category.id} className="btn btn-outline-primary">
+                    Show All
+                </a>
+            </div>}
+        </div>
+        {lessons.slice(0,showAll ? lessons.lenght : 4).map((it, i) => {
+            return LessonItem(it, i);
         })}
     </div>);
 }
 
-function AuthSection() {
+export function AuthSection() {
     const {login, logout, user} = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
