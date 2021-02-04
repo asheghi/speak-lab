@@ -8,10 +8,11 @@ export default function LineModal(props) {
     if (!selectedLine) return null;
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
-    const [error,setError] = useState(null);
-    const [translation,setTranslation] = useState(null);
-    const [cancelToken,setCancelToken] = useState(null);
+    const [error, setError] = useState(null);
+    const [translation, setTranslation] = useState(null);
+    const [cancelToken, setCancelToken] = useState(null);
     const [currentSelection, setCurrentSelection] = useState(null);
+
     let onTextHighlightedCallback = async (arg1) => {
         console.log("onTextHighlightedCallback", arguments);
         if (typeof document !== "undefined") {
@@ -30,7 +31,7 @@ export default function LineModal(props) {
 
                 let source = axios.CancelToken.source();
                 setCancelToken(source)
-                let {getDefinition: {result, error,translation}} = await fetchQuery(`
+                let {getDefinition: {result, error, translation}} = await fetchQuery(`
                     query($word: String!){
                         getDefinition(word: $word,lang: "en"){
                             result
@@ -38,13 +39,13 @@ export default function LineModal(props) {
                             translation
                         }
                     }
-                `,{word},source.token);
+                `, {word}, source.token);
                 console.log(result, error);
                 if (result) {
                     result = JSON.parse(result);
                     setResult(result)
                 }
-                if (error){
+                if (error) {
                     error = JSON.parse(error);
                     setError(error);
                 }
@@ -62,12 +63,19 @@ export default function LineModal(props) {
     let onMouseOverHighlightedWordCallback = () => {
         console.log("onMouseOverHighlightedWordCallback", arguments);
     };
+    useEffect(() => {
+        console.log('fucking calling it');
+        if (!loading && !currentSelection && !result) {
+            setCurrentSelection(selectedLine.text);
+        }
+    },[]);
+
     return (<div>
-        <div className="modal"  tabIndex="-1" id="line-modal" data-keyboard="false" data-backdrop="static">
+        <div className="modal" tabIndex="-1" id="line-modal" data-keyboard="false" data-backdrop="static">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">Modal title</h5>
+                        <h5 className="modal-title">Select to translate</h5>
                         {/*<button type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>*/}
@@ -87,7 +95,8 @@ export default function LineModal(props) {
                         />}
 
                         <div className="form-group mt-3 w-100">
-                            <textarea cols={1} className="w-100" placeholder="Define Something Else?" onChange={(e)=>onTextHighlightedCallback(e.target.value.trim())}/>
+                            <textarea cols={1} className="w-100" placeholder="Define Something Else?"
+                                      onChange={(e) => onTextHighlightedCallback(e.target.value.trim())}/>
                         </div>
                         <br/>
                         {loading && <p>Loading ...</p>}
@@ -96,48 +105,53 @@ export default function LineModal(props) {
                         {translation && <p>
                             <p dir="rtl" className="text-right text-primary">{translation.text}</p>
                         </p>}
-                        {result && !error && <WordDefinition onTextHighlightedCallback={onTextHighlightedCallback} result={result}/> }
-                        <a className="text-primary" href={`https://translate.google.com/?sl=auto&tl=fa&text=${currentSelection}&op=translate`} target="_blank">
+                        {result && !error &&
+                        <WordDefinition onTextHighlightedCallback={onTextHighlightedCallback} result={result}/>}
+                        <a className="text-primary"
+                           href={`https://translate.google.com/?sl=auto&tl=fa&text=${currentSelection}&op=translate`}
+                           target="_blank">
                             Google Translate
                         </a>
                         <br/>
                     </div>
                     <div className="modal-footer">
                         <button
-                            onClick={()=>{
+                            onClick={() => {
                                 setResult(null)
                                 setLoading(false);
                                 setError(null);
                                 setTranslation(null);
                             }}
-                            type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                            type="button" className="btn btn-secondary" data-dismiss="modal">Close
+                        </button>
                         {/*<button type="button" className="btn btn-primary">Save changes</button>*/}
                     </div>
                 </div>
             </div>
         </div>
-    </div>)
+    </div>);
 }
 
 
-function WordDefinition({result,onTextHighlightedCallback}) {
+function WordDefinition({result, onTextHighlightedCallback}) {
     if (!result) {
         return null;
     }
     return result.map(res => (
         <div>
-            <h4 className="mt-4 d-inline" style={{borderBottom:'3px solid var(--primary)'}}>{res.word}</h4>
+            <h4 className="mt-4 d-inline" style={{borderBottom: '3px solid var(--primary)'}}>{res.word}</h4>
             {Object.keys(res.meaning).map(meaningKey => (
                 <div className="mt-2">
-                <b className="text-primary ">{meaningKey}</b>
-                {res.meaning[meaningKey].map(meaning => (<div>
-                    <h6 className="font-weight-bold">
-                        {meaning.definition}
-                    </h6>
+                    <b className="text-primary ">{meaningKey}</b>
+                    {res.meaning[meaningKey].map(meaning => (<div>
+                        <h6 className="font-weight-bold">
+                            {meaning.definition}
+                        </h6>
 
-                    {meaning.example && meaning.example.length > 0 &&  <p><b className="text-muted font-weight-light">- </b>  {meaning.example}</p> }
+                        {meaning.example && meaning.example.length > 0 &&
+                        <p><b className="text-muted font-weight-light">- </b> {meaning.example}</p>}
+                    </div>))}
                 </div>))}
-            </div>))}
         </div>
     ))
 }
