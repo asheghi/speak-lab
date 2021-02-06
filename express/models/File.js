@@ -124,6 +124,9 @@ module.exports = (keystone, listKey, {validation: {mimetype: validationMimeType 
                                fieldPath, // exists only for field hooks
                            }) => {
                 // Input resolution logic. Object returned is used in place of `resolvedData`.
+                if (!resolvedData.file) {
+                    return resolvedData;
+                }
                 const {originalFilename, mimetype, encoding} = resolvedData.file;
                 return new Promise(async (resolve, reject) => {
                     try {
