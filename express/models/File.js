@@ -82,7 +82,7 @@ module.exports = (keystone, listKey, {validation: {mimetype: validationMimeType 
             },
             name: {
                 type: Fields.Text,
-                adminConfig: {isReadOnly: true,},
+                //adminConfig: {isReadOnly: true,},
             },
             encoding: {
                 type: Fields.Text,
