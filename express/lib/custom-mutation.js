@@ -100,6 +100,38 @@ module.exports = keystone => {
     keystone.extendGraphQLSchema({
         mutations: [
             {
+                schema: 'importSoundFromUrl(url:String!,fileName:String) : Boolean',
+                resolver: async function (_, args, ctx) {
+                    const {url, fileName: argFileName} = args;
+                    const http = require('http'); // or 'https' for https:// URLs
+                    const fs = require('fs');
+                    const fileName = argFileName || decodeURI(url.substring(url.lastIndexOf('/') + 1));
+                    let filePath = "/tmp/" + fileName;
+                    const file = fs.createWriteStream(filePath);
+                    await new Promise((resolve, reject) => {
+                        http.get(url, async function (response) {
+                            response.pipe(file);
+                            file.on('finish', function () {
+                                file.close();
+                                resolve();
+                            });
+                        });
+                    })
+
+                    const f = prepareFile(filePath);
+                    const soundItem = await createItem({
+                        keystone,
+                        listKey: 'Sound',
+                        item: {file: f.promise,},
+                        returnFields: `id`,
+                    });
+
+                    fs.unlinkSync(filePath);
+                    console.log('new sound', soundItem);
+                    return true;
+                }
+            },
+            {
                 schema: 'importSoundFromDisk(path:String!) : Int',
                 resolver: async function (_, args, ctx) {
                     const fs = require('fs');

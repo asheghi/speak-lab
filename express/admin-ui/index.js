@@ -3,6 +3,7 @@ import CustomPage from "./views/CustomPage";
 import About from "./views/About";
 import ImageGallery from "./views/ImageGallery";
 import DownloadLink from "./views/DownloadVideo";
+import DownloadMp3 from "./views/DownloadMp3";
 export default {
     /*  customToast,
       itemHeaderActions,
@@ -28,6 +29,11 @@ export default {
             label: 'DownloadLink',
             path: 'video-from-url',
             component: DownloadLink,
+        },
+        {
+            label: 'Mp3 from link',
+            path: 'mp3-from-url',
+            component: DownloadMp3,
         },
         // Ordering existing list pages
         {

@@ -80,6 +80,7 @@ type File {
 type GetDefinitionResponse {
     error: String
     result: String
+    translation: String
 }
 
 " A keystone list "
@@ -251,6 +252,9 @@ type Mutation {
     " Delete multiple Word items by ID. "
     deleteWords(ids: [ID!]): [Word]
     downloadVideo(fileName: String!, url: String!): Sound
+    importSoundFromDisk(path: String!): Int
+    importSoundFromUrl(fileName: String, url: String!): Boolean
+    importSubtitleFromDisk(path: String!): Int
     unauthenticateUser: unauthenticateUserOutput
     " Update a single Artist item by ID. "
     updateArtist(data: ArtistUpdateInput, id: ID!): Artist
