@@ -14,7 +14,7 @@
 
 const userIsAdmin = ({authentication: {item: user}}) => Boolean(user && user.isAdmin);
 
-const isAuthenticated = ({authentication: {item: user}}) =>  Boolean(user);
+const isAuthenticated = ({authentication: {item: user}}) => Boolean(user);
 
 
 const isOwner = ({authentication: {item: user}}) => {
@@ -25,8 +25,8 @@ const isOwner = ({authentication: {item: user}}) => {
 }
 
 module.exports.defaultAccessList = {
-    create:isAuthenticated,
+    create: userIsAdmin,
     read: true,
-    update:isOwner,
-    delete:isOwner,
+    update: userIsAdmin,
+    delete: userIsAdmin,
 }

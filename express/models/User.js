@@ -2,7 +2,7 @@ const {Text, Checkbox, Password} = require('@keystonejs/fields');
 
 
 // Access control functions
-const userIsAdmin = ({authentication: {item: user}}) => Boolean(user && user.isAdmin);
+export const userIsAdmin = ({authentication: {item: user}}) => Boolean(user && user.isAdmin);
 const userOwnsItem = ({authentication: {item: user}}) => {
     if (!user) {
         return false;

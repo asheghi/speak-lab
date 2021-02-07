@@ -1,3 +1,5 @@
+import {userIsAdmin} from "../models/User";
+
 var translate = require('translation-google');
 const fs = require('fs');
 const {Upload} = require('graphql-upload');
@@ -70,7 +72,6 @@ module.exports = keystone => {
                 }
             )
         }
-    ;
     keystone.extendGraphQLSchema({
         types: [
             {
@@ -87,12 +88,14 @@ module.exports = keystone => {
             {
                 schema: 'downloadVideo(url:String!,fileName:String!) : Sound',
                 resolver: downloadVideo,
+                access:userIsAdmin
             }
         ],
         queries: [
             {
                 schema: 'getDefinition(word: String!,lang: String) : GetDefinitionResponse',
                 resolver: getDefinitionResolver,
+                access:userIsAdmin
             }
         ]
     })
@@ -129,7 +132,8 @@ module.exports = keystone => {
                     fs.unlinkSync(filePath);
                     console.log('new sound', soundItem);
                     return true;
-                }
+                },
+                access:userIsAdmin
             },
             {
                 schema: 'importSoundFromDisk(path:String!) : Int',
@@ -166,7 +170,8 @@ module.exports = keystone => {
                         }
                     }
                     return count;
-                }
+                },
+                access:userIsAdmin
             },
             {
                 schema: 'importSubtitleFromDisk(path:String!) : Int',
@@ -203,7 +208,8 @@ module.exports = keystone => {
                         }
                     }
                     return count;
-                }
+                },
+                access:userIsAdmin
             }]
     })
 }
