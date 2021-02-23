@@ -27,7 +27,8 @@ export default class Player extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({skipSilence: Boolean(localStorage.getItem('skipSilence'))});
+        const long_lesson = +(this.props.lesson.sound.duration.split(':')[1]) > 5 ;
+        this.setState({skipSilence: Boolean(localStorage.getItem('skipSilence') || long_lesson )});
         this.setState({
             silenceDuration: localStorage.getItem('skipSilenceDuration') ?
                 +JSON.parse(localStorage.getItem('skipSilenceDuration')) : 1000

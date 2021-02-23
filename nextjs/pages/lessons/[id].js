@@ -45,6 +45,7 @@ export async function getStaticProps({params}) {
           subtitles
         }
         sound {
+          duration
           url
         }
         image {

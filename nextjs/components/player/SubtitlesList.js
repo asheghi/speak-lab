@@ -10,6 +10,10 @@ export default function SubtitleList(props) {
         }
     }
 
+    function formatText (text){
+        return String(text).replaceAll('<i>','').replaceAll('</i>','');
+    }
+
     return (<div>
         {
             subtitles
@@ -21,7 +25,7 @@ export default function SubtitleList(props) {
                                 onDoubleClick={() => onItemDoubleClick(it)}
                                 onClick={() => onItemClick(it)}
                                 className={'row_common' + '  ' + 'noselect' + ' ' + (it.active ? activeStyle : inActiveStyle)}>
-                        {it.text}
+                        {formatText(it.text)}
                     </div>;
                 })
         }
